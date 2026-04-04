@@ -1,6 +1,6 @@
 QDockWidget {
     background-color: $SurfaceBackground;
-    font-size: $FontSizeBody;
+    font-size: $FontSizeChrome;
     padding: 0px;
     margin: 0px;
 }
