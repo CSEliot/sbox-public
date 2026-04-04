@@ -8,6 +8,17 @@ internal class PageGeneral : Widget
 		Layout.Margin = 32;
 
 		{
+			Layout.Add( new Label.Subtitle( "Interface" ) );
+
+			var uiSheet = new ControlSheet();
+			uiSheet.AddProperty( () => EditorPreferences.GuiScale );
+			uiSheet.AddProperty( () => EditorPreferences.WidgetFontScale );
+			Layout.Add( uiSheet );
+		}
+
+		Layout.AddSpacingCell( 16 );
+
+		{
 			Layout.Add( new Label.Subtitle( "Code" ) );
 
 			var sheet = new ControlSheet();

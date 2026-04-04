@@ -384,6 +384,14 @@ public static partial class Theme
 			}
 		}
 
+		// Inject scaled font-size variables based on the user's GUI scale preference
+		var guiScale = EditorPreferences.GuiScale / 100f;
+		values["$FontSizeTiny"] = $"{(int)System.Math.Round( 10f * guiScale )}px";
+		values["$FontSizeBody"] = $"{(int)System.Math.Round( 11f * guiScale )}px";
+		values["$FontSizeLarge"] = $"{(int)System.Math.Round( 12f * guiScale )}px";
+		values["$FontSizeSubtitle"] = $"{(int)System.Math.Round( 16f * guiScale )}px";
+		values["$FontSizeTitle"] = $"{(int)System.Math.Round( 26f * guiScale )}px";
+
 		// Sort by length so we don't stomp stuff, e.g. $Surface and $SurfaceSubtle
 		values = values.OrderByDescending( x => x.Key.Length ).ToDictionary();
 
