@@ -35,6 +35,36 @@ public static class EditorPreferences
 		set => ConVarSystem.SetValue( "hotload_fast", value.ToString(), true );
 	}
 
+	/// <summary>
+	/// Scale of the editor UI font sizes, in percent. Affects CSS-driven elements such as menus, toolbars, and tree views.
+	/// </summary>
+	[Title( "Scale Text - Toolbars %" )]
+	[Range( 75, 200, true )]
+	public static int GuiScale
+	{
+		get => EditorCookie.Get( "GuiScale", 100 );
+		set
+		{
+			EditorCookie.Set( "GuiScale", value );
+			Application.ReloadStyles();
+		}
+	}
+
+	/// <summary>
+	/// Scale of widget-painted font sizes, in percent. Affects content areas such as the hierarchy, asset browser, mixer, and library manager.
+	/// </summary>
+	[Title( "Scale Text - Widgets %" )]
+	[Range( 75, 200, true )]
+	public static int WidgetFontScale
+	{
+		get => EditorCookie.Get( "WidgetFontScale", 100 );
+		set
+		{
+			EditorCookie.Set( "WidgetFontScale", value );
+			Application.ReloadStyles();
+		}
+	}
+
 	public enum NotificationLevel
 	{
 		ShowAlways,
