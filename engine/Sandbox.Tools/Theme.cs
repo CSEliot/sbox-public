@@ -384,13 +384,26 @@ public static partial class Theme
 			}
 		}
 
-		// Inject scaled font-size variables based on the user's GUI scale preference
-		var guiScale = EditorPreferences.GuiScale / 100f;
-		values["$FontSizeTiny"] = $"{(int)System.Math.Round( 10f * guiScale )}px";
-		values["$FontSizeBody"] = $"{(int)System.Math.Round( 11f * guiScale )}px";
-		values["$FontSizeLarge"] = $"{(int)System.Math.Round( 12f * guiScale )}px";
-		values["$FontSizeSubtitle"] = $"{(int)System.Math.Round( 16f * guiScale )}px";
-		values["$FontSizeTitle"] = $"{(int)System.Math.Round( 26f * guiScale )}px";
+		// Group 1: Menus & Title Bar
+		var menuScale = EditorPreferences.MenuFontScale / 100f;
+		values["$FontSizeMenu"] = $"{(int)System.Math.Round( 11f * menuScale )}px";
+
+		// Group 2: Tabs, Docks & Status Bar
+		var chromeScale = EditorPreferences.ChromeFontScale / 100f;
+		values["$FontSizeChrome"] = $"{(int)System.Math.Round( 11f * chromeScale )}px";
+
+		// Group 3: Inspector Labels
+		var labelScale = EditorPreferences.LabelFontScale / 100f;
+		values["$FontSizeLabelTiny"] = $"{(int)System.Math.Round( 10f * labelScale )}px";
+		values["$FontSizeLabelBody"] = $"{(int)System.Math.Round( 11f * labelScale )}px";
+		values["$FontSizeLabelLarge"] = $"{(int)System.Math.Round( 12f * labelScale )}px";
+		values["$FontSizeLabelSubtitle"] = $"{(int)System.Math.Round( 16f * labelScale )}px";
+		values["$FontSizeLabelTitle"] = $"{(int)System.Math.Round( 26f * labelScale )}px";
+
+		// Group 4: Tree Views & Console
+		var contentScale = EditorPreferences.ContentFontScale / 100f;
+		values["$FontSizeTree"] = $"{(int)System.Math.Round( 12f * contentScale )}px";
+		values["$FontSizeConsole"] = $"{(int)System.Math.Round( 10f * contentScale )}px";
 
 		// Sort by length so we don't stomp stuff, e.g. $Surface and $SurfaceSubtle
 		values = values.OrderByDescending( x => x.Key.Length ).ToDictionary();

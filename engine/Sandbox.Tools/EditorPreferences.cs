@@ -36,33 +36,58 @@ public static class EditorPreferences
 	}
 
 	/// <summary>
-	/// Scale of the editor UI font sizes, in percent. Affects CSS-driven elements such as menus, toolbars, and tree views.
+	/// Font scale for menus and the title bar menu bar.
 	/// </summary>
-	[Title( "Scale Text - Toolbars %" )]
+	[Title( "Menus & Title Bar %" )]
 	[Range( 75, 200, true )]
-	public static int GuiScale
+	public static int MenuFontScale
 	{
-		get => EditorCookie.Get( "GuiScale", 100 );
-		set
-		{
-			EditorCookie.Set( "GuiScale", value );
-			Application.ReloadStyles();
-		}
+		get => EditorCookie.Get( "MenuFontScale", 100 );
+		set { EditorCookie.Set( "MenuFontScale", value ); Application.ReloadStyles(); }
 	}
 
 	/// <summary>
-	/// Scale of widget-painted font sizes, in percent. Affects content areas such as the hierarchy, asset browser, mixer, and library manager.
+	/// Font scale for tab labels, dock widget titles, the status bar, and combo boxes.
 	/// </summary>
-	[Title( "Scale Text - Widgets %" )]
+	[Title( "Tabs, Docks & Status Bar %" )]
+	[Range( 75, 200, true )]
+	public static int ChromeFontScale
+	{
+		get => EditorCookie.Get( "ChromeFontScale", 100 );
+		set { EditorCookie.Set( "ChromeFontScale", value ); Application.ReloadStyles(); }
+	}
+
+	/// <summary>
+	/// Font scale for inspector property labels and editor body/title labels.
+	/// </summary>
+	[Title( "Page & Section Headings %" )]
+	[Range( 75, 200, true )]
+	public static int LabelFontScale
+	{
+		get => EditorCookie.Get( "LabelFontScale", 100 );
+		set { EditorCookie.Set( "LabelFontScale", value ); Application.ReloadStyles(); }
+	}
+
+	/// <summary>
+	/// Font scale for tree view items and the console output.
+	/// </summary>
+	[Title( "Tree Views & Console %" )]
+	[Range( 75, 200, true )]
+	public static int ContentFontScale
+	{
+		get => EditorCookie.Get( "ContentFontScale", 100 );
+		set { EditorCookie.Set( "ContentFontScale", value ); Application.ReloadStyles(); }
+	}
+
+	/// <summary>
+	/// Font scale for custom-painted widget text such as the hierarchy, asset browser, mixer, and library manager.
+	/// </summary>
+	[Title( "Inspector & Panel Content %" )]
 	[Range( 75, 200, true )]
 	public static int WidgetFontScale
 	{
 		get => EditorCookie.Get( "WidgetFontScale", 100 );
-		set
-		{
-			EditorCookie.Set( "WidgetFontScale", value );
-			Application.ReloadStyles();
-		}
+		set { EditorCookie.Set( "WidgetFontScale", value ); Application.ReloadStyles(); }
 	}
 
 	public enum NotificationLevel

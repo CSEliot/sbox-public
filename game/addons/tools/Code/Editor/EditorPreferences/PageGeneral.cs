@@ -11,7 +11,10 @@ internal class PageGeneral : Widget
 			Layout.Add( new Label.Subtitle( "Interface" ) );
 
 			var uiSheet = new ControlSheet();
-			uiSheet.AddProperty( () => EditorPreferences.GuiScale );
+			uiSheet.AddProperty( () => EditorPreferences.MenuFontScale );
+			uiSheet.AddProperty( () => EditorPreferences.ChromeFontScale );
+			uiSheet.AddProperty( () => EditorPreferences.LabelFontScale );
+			uiSheet.AddProperty( () => EditorPreferences.ContentFontScale );
 			uiSheet.AddProperty( () => EditorPreferences.WidgetFontScale );
 			Layout.Add( uiSheet );
 		}
