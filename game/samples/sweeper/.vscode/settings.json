@@ -1,0 +1,20 @@
+{
+  "files.associations": {
+    "*.shader": "slang",
+    "*.hlsl": "slang"
+  },
+  "slang.additionalSearchPaths": [
+    "Z:\\home\\cseliot\\applications\\sbox\\2-sbox-public\\game\\core\\shaders",
+    "Z:\\home\\cseliot\\Applications\\SBox\\2-sbox-public\\game\\addons\\base\\Assets\\shaders",
+    "Z:\\home\\cseliot\\Applications\\SBox\\2-sbox-public\\game\\addons\\menu\\Assets\\shaders",
+    "Z:\\home\\cseliot\\Applications\\SBox\\2-sbox-public\\game\\addons\\tools\\Assets\\shaders",
+    "Z:\\home\\cseliot\\Applications\\SBox\\2-sbox-public\\game\\editor\\ShaderGraph\\Assets\\shaders",
+    "Z:\\home\\cseliot\\Applications\\SBox\\2-sbox-public\\game\\editor\\ActionGraph\\Assets\\shaders",
+    "Z:\\home\\cseliot\\Applications\\SBox\\2-sbox-public\\game\\editor\\MovieMaker\\Assets\\shaders",
+    "Z:\\home\\cseliot\\Applications\\SBox\\2-sbox-public\\game\\editor\\Hammer\\Assets\\shaders",
+    "Z:\\home\\cseliot\\Applications\\SBox\\2-sbox-public\\game\\editor\\DooEditor\\Assets\\shaders",
+    "Z:\\home\\cseliot\\Applications\\SBox\\2-sbox-public\\game\\samples\\sweeper\\Assets\\shaders"
+  ],
+  "slang.predefinedMacros": [],
+  "slang.workspaceFlavor": "vfx"
+}
