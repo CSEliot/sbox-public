@@ -26,11 +26,7 @@ native class CSimplePCMWaveData
 	static CSimplePCMWaveData Create();[new]
 	void Dispose(); [delete]
 
-	inline void ParseMP3File( CastTo[uint8*] void* pData, int nDataSize )
-	{
-		CMPG123System mp3system;
-		self->ParseMP3File( pData, nDataSize, mp3system );
-	}
+	void ParseMP3File( CastTo[uint8*] void* pData, CastTo[size_t] int nDataSize );
 
 	inline void* GetPCMData()
 	{
