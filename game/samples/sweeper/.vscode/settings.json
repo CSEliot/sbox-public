@@ -4,7 +4,7 @@
     "*.hlsl": "slang"
   },
   "slang.additionalSearchPaths": [
-    "Z:\\home\\cseliot\\applications\\sbox\\2-sbox-public\\game\\core\\shaders",
+    "Z:\\home\\cseliot\\Applications\\SBox\\2-sbox-public\\game\\core\\shaders",
     "Z:\\home\\cseliot\\Applications\\SBox\\2-sbox-public\\game\\addons\\base\\Assets\\shaders",
     "Z:\\home\\cseliot\\Applications\\SBox\\2-sbox-public\\game\\addons\\menu\\Assets\\shaders",
     "Z:\\home\\cseliot\\Applications\\SBox\\2-sbox-public\\game\\addons\\tools\\Assets\\shaders",
