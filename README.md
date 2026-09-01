@@ -10,6 +10,21 @@
 [Documentation]: https://sbox.game/dev/doc/
 [Contributing]: CONTRIBUTING.md
 
+---
+
+# CS Eliot Personal Fork
+
+---
+
+## CS Eliot Personal Fork Details
+
+master branch is always 1-1 with FacePunch master.
+community branch is my personal workspace with things like my own build.sh and features I prefer not to PR. master is its upstream and master changes are rebased into community branch.
+feature/foo type branches are always forked from community, then PR'd to master.
+
+---
+
+
 # s&box
 
 s&box is a modern game engine, built on Valve's Source 2 and the latest .NET technology, it provides a modern intuitive editor for creating games.
