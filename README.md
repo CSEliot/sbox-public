@@ -35,6 +35,18 @@ That drops the community base and leaves only the feature's own commits. feature
 
 The sanity check matters: git normally drops the community base commits by patch-id even if community was rebased in the meantime, but it can't when a community commit's *content* was rewritten (a conflict resolved during a community rebase) - then build.sh leaks into the PR diff. Editing build.sh or .gitignore inside a feature commit leaks too.
 
+## Updating from Upstream
+
+This is assuming you're never standing in the master branch. And, if you follow these steps correctly, you shouldn't need to.
+
+```bash
+git fetch upstream master:master   # no checkout; fails loudly if not a fast-forward
+git push origin master             # branch name required — you're standing on community
+
+git checkout community && git rebase master
+git push --force-with-lease        # Rebasing changes ancestor history, so force required. Lease protects us in the case where there's more than 1 meddler per branch.
+```
+
 ---
 
 
