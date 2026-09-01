@@ -18,7 +18,7 @@
 
 ## CS Eliot Personal Fork Details
 
-master branch is always 1-1 with FacePunch master.
+master branch is always 1-1 with FacePunch master (github.com/Facepunch/sbox-public)
 community branch is my personal workspace with things like my own build.sh and features I prefer not to PR. master is its upstream and master changes are rebased into community branch.
 feature/foo type branches are always forked from community, then PR'd to master.
 
