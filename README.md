@@ -22,6 +22,19 @@ master branch is always 1-1 with FacePunch master (github.com/Facepunch/sbox-pub
 community branch is my personal workspace with things like my own build.sh and features I prefer not to PR. master is its upstream and master changes are rebased into community branch.
 feature/foo type branches are always forked from community, then PR'd to master.
 
+Work on feature/foo normally, with community's build.sh available the whole time. Because community carries personal commits (build.sh, this README section, .gitignore additions) that must never reach FacePunch, the feature is replayed off master onto a disposable PR branch right before opening the PR:
+
+```bash
+git checkout -b feature/foo-pr feature/foo
+git rebase --onto master community feature/foo-pr
+git diff --name-only master...feature/foo-pr   # sanity check: only the feature's own files
+git push -u origin feature/foo-pr
+```
+
+That drops the community base and leaves only the feature's own commits. feature/foo itself is never rewritten, so it keeps build.sh and stays workable. To update the PR after more work: `git branch -f feature/foo-pr feature/foo`, rebase again, force-push.
+
+The sanity check matters: git normally drops the community base commits by patch-id even if community was rebased in the meantime, but it can't when a community commit's *content* was rewritten (a conflict resolved during a community rebase) - then build.sh leaks into the PR diff. Editing build.sh or .gitignore inside a feature commit leaks too.
+
 ---
 
 
