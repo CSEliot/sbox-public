@@ -101,3 +101,14 @@ engine/TestResults/
 /game/tools
 /game/aftermath_dumps
 /game/gamecache
+
+#
+# Other
+#
+/ampersand/
+game/addons/menu/Transients/materials/
+game/addons/menu/Transients/textures/
+game/addons/menu/Transients/models/
+.claude/
+.serena/
+game/samples/sweeper/.vscode/
