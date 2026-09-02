@@ -18,34 +18,50 @@
 
 ## CS Eliot Personal Fork Details
 
-master branch is always 1-1 with FacePunch master (github.com/Facepunch/sbox-public)
-community branch is my personal workspace with things like my own build.sh and features I prefer not to PR. master is its upstream and master changes are rebased into community branch.
-feature/foo type branches are always forked from community, then PR'd to master.
-
-Work on feature/foo normally, with community's build.sh available the whole time. Because community carries personal commits (build.sh, this README section, .gitignore additions) that must never reach FacePunch, the feature is replayed off master onto a disposable PR branch right before opening the PR:
+### First Steps
 
 ```bash
-git checkout -b feature/foo-pr feature/foo
-git rebase --onto master community feature/foo-pr
-git diff --name-only master...feature/foo-pr   # sanity check: only the feature's own files
-git push -u origin feature/foo-pr
+./setup-community-fork.sh
+```
+This repository has unique configurations to setup.
+
+### Why Like This?
+
+1. So Master Branch is always 1-1 with FacePunch master (github.com/Facepunch/sbox-public)
+2. So Community Branch can offer a lower barrier-to-entry. (With things like a build.sh and features we prefer not to PR, Master is Upstream and Master changes are rebased into Community Branch)
+3. So we create feature/foo type branches that have the best of both worlds: dev-friendly tools in-repo PLUS!! easy PR submissions containing ONLY necessary changes.
+
+### Okay, What Do I Do?
+
+Work on your feature/foo fork (off Community Branch) normally, with Community's tools available the whole time. When you're ready to make a PR, do the following:
+
+```bash
+git checkout -b feature/foo-pr feature/foo 		# create the pr branch
+git rebase --onto master community feature/foo-pr	# update your pr with master, clears the changes/additions from Community Branch
+git diff --name-only master...feature/foo-pr   		# sanity check: only the feature's own files
+git push -u origin feature/foo-pr			# push and open github to create your online pull request submission
 ```
 
-That drops the community base and leaves only the feature's own commits. feature/foo itself is never rewritten, so it keeps build.sh and stays workable. To update the PR after more work: `git branch -f feature/foo-pr feature/foo`, rebase again, force-push.
-
-The sanity check matters: git normally drops the community base commits by patch-id even if community was rebased in the meantime, but it can't when a community commit's *content* was rewritten (a conflict resolved during a community rebase) - then build.sh leaks into the PR diff. Editing build.sh or .gitignore inside a feature commit leaks too.
+Feature/foo itself is never rewritten, so it keeps build.sh and stays workable. To update your PR, if needed: `git branch -f feature/foo-pr feature/foo`, rebase again, force-push.
 
 ## Updating from Upstream
 
+```bash
+git fetch upstream master:master   		# no checkout; if this fails, someone has touched master inappropriately, contact authorities
+git push origin master             		# making sure remote copy is also updated
+
+git checkout community && git rebase master	# update community with the master changes
+git push --force-with-lease        		# Rebasing changes ancestor history, so force required. Lease protects us in the case where there's more than 1 meddler per branch.
+```
 This is assuming you're never standing in the master branch. And, if you follow these steps correctly, you shouldn't need to.
 
-```bash
-git fetch upstream master:master   # no checkout; fails loudly if not a fast-forward
-git push origin master             # branch name required — you're standing on community
+If you have any feature/foo branches in flight, rebase them onto the new Community tip too:
 
-git checkout community && git rebase master
-git push --force-with-lease        # Rebasing changes ancestor history, so force required. Lease protects us in the case where there's more than 1 meddler per branch.
+```bash
+git rebase community feature/foo
 ```
+
+Otherwise their base is a Community tip that no longer exists, and the `--onto` above can't tell which commits came from Community anymore - build.sh and friends leak into your PR diff.
 
 ---
 
