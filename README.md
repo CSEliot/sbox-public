@@ -63,6 +63,10 @@ git rebase community feature/foo
 
 Otherwise their base is a Community tip that no longer exists, and the `--onto` above can't tell which commits came from Community anymore - build.sh and friends leak into your PR diff.
 
+## Contributing to Community Repo Itself
+
+This repo is a setup to help making /Facepunch/sbox-public better. It's not SUPPOSED to actually be "worked on" itself. [BUT IN CASE WANT TO CHECK HERE](https://github.com/CSEliot/sbox-public/blob/community/todo.md)
+
 ---
 
 
