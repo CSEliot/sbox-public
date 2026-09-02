@@ -12,11 +12,11 @@
 
 ---
 
-# CS Eliot Personal Fork
+# S&Box Community Fork
 
 ---
 
-## CS Eliot Personal Fork Details
+## A Personal Fork for the S&Box Linux Community - Details
 
 ### First Steps
 
