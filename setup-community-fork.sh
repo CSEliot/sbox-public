@@ -44,7 +44,7 @@ git config branch.master.pushRemote origin
 git config branch.master.rebase true
 
 # ignore changes to sample projects when opening locally (perhaps we SHOULD have a docker, so  .sbproj paths are always the same? hmmmm)
-git update-index --skip-worktree ./game/samples/*/.sbproj
+git ls-files -z 'game/samples/*/.sbproj' | xargs -0 -r git update-index --skip-worktree
 
 # make sure master exists and matches Facepunch. git refuses to fetch into a
 # branch that is checked out, so fast-forward it in place when we're on it
