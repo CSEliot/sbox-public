@@ -44,6 +44,9 @@ git push -u origin feature/foo-pr			# push and open github to create your online
 
 Feature/foo itself is never rewritten, so it keeps build.sh and stays workable. To update your PR, if needed: `git branch -f feature/foo-pr feature/foo`, rebase again, force-push.
 
+### Finally, optional but recommended:
+cd into the /sbox-public/ folder if not already. Then git clone https://github.com/joshuascript/ampersand and build it. It's a frontend launcher to dejank remaining sbox-dev linux native jank.
+
 ## Updating from Upstream
 
 ```bash
