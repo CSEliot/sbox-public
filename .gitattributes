@@ -6,6 +6,12 @@ game/** text=auto eol=crlf
 # Except c# files, auto that
 game/**/*.cs text=auto
 
+# Shell scripts must keep LF regardless of core.autocrlf, and last match wins so
+# this has to stay below the game/** rule above. A CRLF checkout puts \r on the
+# end of the shebang and the kernel then looks for an interpreter named "dash\r":
+# env: $'dash\r': No such file or directory
+*.sh text eol=lf
+
 #
 # GitHub linguist overrides (https://github.com/github-linguist/linguist/blob/main/docs/overrides.md)
 # Lets GitHub know the proper languages, what code is generated, third party, etc. for better stats/diffs
