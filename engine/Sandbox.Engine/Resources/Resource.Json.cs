@@ -171,7 +171,7 @@ public partial class Resource
 			if ( string.IsNullOrEmpty( referencePath ) )
 				return created;
 
-			return LoadFromPath( targetType, referencePath.Replace( '\\', '/' ) );
+			return Load( targetType, referencePath.Replace( '\\', '/' ) );
 		}
 
 		//
