@@ -34,7 +34,9 @@ namespace Editor
 		/// </summary>
 		JsonElement? Read()
 		{
-			var info = new System.IO.FileInfo( FilePath );
+			var readPath = System.IO.File.Exists( FilePath ) ? FilePath : Sandbox.CaseInsensitivePhysicalFileSystem.ResolveNativeCasing( System.IO.Path.GetFullPath( FilePath ) );
+
+			var info = new System.IO.FileInfo( readPath );
 			var exists = info.Exists;
 			var writeTime = exists ? info.LastWriteTimeUtc : default;
 			var length = exists ? info.Length : 0;
@@ -51,7 +53,7 @@ namespace Editor
 
 			try
 			{
-				var json = System.IO.File.ReadAllText( FilePath );
+				var json = System.IO.File.ReadAllText( readPath );
 
 				using var document = JsonDocument.Parse( json, new JsonDocumentOptions { AllowTrailingCommas = true, CommentHandling = JsonCommentHandling.Skip } );
 				var root = document.RootElement.Clone();
