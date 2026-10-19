@@ -120,7 +120,7 @@ public abstract class ResourceLoader
 		Mount = mount;
 		IsShutdown = false;
 		RelativePath = path;
-		Path = $"mount://{Mount.Ident}/{RelativePath}";
+		Path = $"mount://{Mount.Ident}/{RelativePath}".ToLowerInvariant();
 		Type = type;
 		Name = System.IO.Path.GetFileNameWithoutExtension( path );
 	}

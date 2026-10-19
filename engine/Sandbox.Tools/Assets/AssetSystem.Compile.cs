@@ -22,7 +22,7 @@ public static partial class AssetSystem
 		using var context = new ResourceCompileContextImp( _context );
 
 		var filename = context.AbsolutePath;
-		var extension = System.IO.Path.GetExtension( filename ).Trim( '.' );
+		var extension = System.IO.Path.GetExtension( filename ).Trim( '.' ).ToLowerInvariant();
 
 		if ( AssetType.Find( extension )?.IsUncompiled == true )
 			return false;
@@ -123,8 +123,11 @@ public static partial class AssetSystem
 
 	internal static async Task CompileGameResource( ResourceCompileContextImp context )
 	{
+		// Resolve the disk's real casing: the context names the lowercase identity.
+		var sourcePath = Sandbox.CaseInsensitivePhysicalFileSystem.ResolveNativeCasing( context.AbsolutePath );
+
 		// Get the json contents: the file's, or what a parent compile gave a child it generated
-		var jsonString = context.TryReadOverrideInput( out var input ) ? System.Text.Encoding.UTF8.GetString( input ) : System.IO.File.ReadAllText( context.AbsolutePath );
+		var jsonString = context.TryReadOverrideInput( out var input ) ? System.Text.Encoding.UTF8.GetString( input ) : System.IO.File.ReadAllText( sourcePath );
 
 		//
 		// Pre Feb-2023 we saved GameResources to keyvalues. Keep support for loading this
@@ -143,7 +146,8 @@ public static partial class AssetSystem
 		context.Data.Write( jsonString );
 
 		// Write binary blob data to BLOB block if companion file exists, and compile again once one does
-		var blobPath = context.AbsolutePath + "_d";
+		// The sibling keeps the source's disk casing - the identity spelling may name no file.
+		var blobPath = Asset.ResolveRelatedFilePath( sourcePath, "_d" );
 		context.AddCompileReference( blobPath, optional: true );
 		if ( System.IO.File.Exists( blobPath ) )
 		{

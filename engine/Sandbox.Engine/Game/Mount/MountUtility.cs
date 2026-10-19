@@ -91,6 +91,11 @@ public static class MountUtility
 		return job.Texture;
 	}
 
+	internal static string GetThumbnailPath( ResourceLoader loader )
+	{
+		return $"thumbs/{loader.Mount.Ident}/{loader.RelativePath.WithExtension( ".png" )}".ToLowerInvariant();
+	}
+
 	internal static void TickPreviewRenders()
 	{
 		_activeJobs.RemoveWhere( x => x.IsFinished );

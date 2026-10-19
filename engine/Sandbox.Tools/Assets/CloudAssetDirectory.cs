@@ -608,8 +608,9 @@ internal class CloudAssetDirectory : IDisposable
 	/// </summary>
 	internal Package FindPackage( string absolutePath, string relativePath )
 	{
-		// Normalizing adds a leading slash ("/c:/...") that Windows can't open, so delete with the original path
-		var filePath = absolutePath;
+		// The normalized path is an identity/check key, never a System.IO filename - and
+		// normalizing adds a leading slash ("/c:/...") that Windows can't open.
+		var physicalPath = absolutePath;
 		absolutePath = absolutePath.NormalizeFilename( true );
 		relativePath = relativePath.NormalizeFilename( true );
 
@@ -620,11 +621,7 @@ internal class CloudAssetDirectory : IDisposable
 		{
 			Log.Warning( $"Was unable to determine package for {relativePath}.. Absolute path: {absolutePath}" );
 
-			try
-			{
-				System.IO.File.Delete( filePath );
-			}
-			catch { } // ignore errors, we'll try again next time
+			DeleteOrphanedFile( physicalPath );
 
 			return null;
 		}
@@ -638,6 +635,17 @@ internal class CloudAssetDirectory : IDisposable
 		}
 
 		return null;
+	}
+
+	internal static void DeleteOrphanedFile( string physicalPath )
+	{
+		try
+		{
+			// Prefer the caller's exact spelling, resolving legacy identities only if needed.
+			var path = Sandbox.CaseInsensitivePhysicalFileSystem.ResolveNativeCasing( physicalPath.NormalizeFilename( false, false ) );
+			System.IO.File.Delete( path );
+		}
+		catch { } // ignore errors, we'll try again next time
 	}
 
 	/// <summary>
