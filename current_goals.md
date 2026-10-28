@@ -52,9 +52,10 @@ TASKS:
 		merge fix/mcp-pipe-skip-hotload fixes into community branch and resolve any conflicts.
 		Result: both fix commits cherry-picked onto community (e94f0c77c + 0478f58e3) per Q2; no conflicts. Review CLEAN ([SkipHotload] above lifetime, test file blob matches fix branch, no premature push, live tree untouched).
 
-	Task 3: DONE? NO!
+	Task 3: DONE? YES!
 		rebase master onto community and resolve any conflicts.
 		Clarified (Q3): rebase upstream master INTO community via rebase (git rebase upstream/master community).
+		Result: community rebased onto upstream head 890a3ddd2 in the clone (56 commits replayed, 6 conflict stops resolved both-intents, log task3-rebase-log.md). Review found 1 HIGH (MetaData.cs lost `using System;`) - fixed as commit 50f55c8ac, scoped re-review CLEAN. SboxBuild build + incremental rebuild on fixed tree: success. LOWs: pre-existing duplicated capture-release block in GameMode.cs ClearPlayMode, log section 4 staleness, SKILL.md colon->period, AgentSkill CRLF index-vs-worktree note (all cosmetic/pre-existing, no action).
 		
 NOTES:
 
