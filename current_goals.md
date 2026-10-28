@@ -48,8 +48,9 @@ TASKS:
 		Make the community branch a functioning fork of arcevalis-master and resolve any conflicts.
 		Result: community hard-reset to arcevalis-master be664993d (15 setup commits dropped per Q1). Review CLEAN (reset byte-exact, no premature push, live tree untouched).
 
-	Task 2: DONE? NO!
+	Task 2: DONE? YES!
 		merge fix/mcp-pipe-skip-hotload fixes into community branch and resolve any conflicts.
+		Result: both fix commits cherry-picked onto community (e94f0c77c + 0478f58e3) per Q2; no conflicts. Review CLEAN ([SkipHotload] above lifetime, test file blob matches fix branch, no premature push, live tree untouched).
 
 	Task 3: DONE? NO!
 		rebase master onto community and resolve any conflicts.
