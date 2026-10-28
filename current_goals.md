@@ -55,7 +55,8 @@ TASKS:
 	Task 3: DONE? YES!
 		rebase master onto community and resolve any conflicts.
 		Clarified (Q3): rebase upstream master INTO community via rebase (git rebase upstream/master community).
-		Result: community rebased onto upstream head 890a3ddd2 in the clone (56 commits replayed, 6 conflict stops resolved both-intents, log task3-rebase-log.md). Review found 1 HIGH (MetaData.cs lost `using System;`) - fixed as commit 50f55c8ac, scoped re-review CLEAN. SboxBuild build + incremental rebuild on fixed tree: success. LOWs: pre-existing duplicated capture-release block in GameMode.cs ClearPlayMode, log section 4 staleness, SKILL.md colon->period, AgentSkill CRLF index-vs-worktree note (all cosmetic/pre-existing, no action).
+		REDO (user, 2026-10-28 ~21:35): master was not synced to Facepunch upstream; now synced (github master = Facepunch head d3048a7bf). Rebase community onto the new master and redo the whole task.
+		Result (redo): community rebased onto d3048a7bf in the clone (58 commits replayed, ZERO conflicts - range-diff verified 1:1 by reviewer). Reviewer: LOW only (worker log misstatement, corrected; tree correct, both intents verified). SboxBuild build on new tip: success, 0 CS errors. Pushed.
 		
 NOTES:
 
