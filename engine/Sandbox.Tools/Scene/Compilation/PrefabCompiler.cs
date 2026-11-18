@@ -26,7 +26,7 @@ internal static class PrefabCompiler
 		string json;
 		try
 		{
-			json = SceneSource.ReadJson( sourcePath );
+			json = SceneSource.ReadJson( sourcePath, out _ );
 		}
 		catch ( Exception e ) when ( e is IOException or InvalidDataException or UnauthorizedAccessException or JsonException )
 		{

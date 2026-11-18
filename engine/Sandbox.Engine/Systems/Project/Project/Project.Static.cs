@@ -314,7 +314,7 @@ public partial class Project
 
 	private void StartCompilation()
 	{
-		NativeEngine.FullFileSystem.AddProjectPath( ConfigFilePath, GetAssetsPath().ToLowerInvariant() );
+		NativeEngine.FullFileSystem.AddProjectPath( ConfigFilePath, GetAssetsPath() );
 
 		// What the editor's put on disk for it - the cloud assets its own use, and generated files - found from there as
 		// they are in the editor, rather than nowhere

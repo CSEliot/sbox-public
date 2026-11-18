@@ -263,7 +263,10 @@ public partial class StandaloneExporter
 		if ( !string.IsNullOrEmpty( _exportConfig.StartupImage ) )
 		{
 			var path = _exportConfig.StartupImage;
-			var startupImagePath = Path.Combine( _exportConfig.Project.GetAssetsPath(), path + "_c" );
+			// Compiled outputs derive from the lowercase identity, so resolve the asset's real
+			// compiled path rather than appending _c to its on-disk spelling.
+			var startupImagePath = AssetSystem.FindByPath( path )?.GetCompiledFile( true )
+				?? Path.Combine( _exportConfig.Project.GetAssetsPath(), path + "_c" );
 
 			// The image picker stores the file's absolute path, but the resource system only loads asset-relative paths
 			if ( Path.IsPathRooted( path ) && AssetSystem.FindByPath( path ) is { } startupAsset )

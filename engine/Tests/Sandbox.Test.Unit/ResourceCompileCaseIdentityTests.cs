@@ -16,6 +16,9 @@ public class ResourceCompileCaseIdentityTests
 		internal override int WriteBlock( string blockName, IntPtr data, int count ) => throw new NotSupportedException();
 		public override void AddRuntimeReference( string path ) => throw new NotSupportedException();
 		public override void AddCompileReference( string path, bool optional = false ) => References.Add( (path, optional) );
+		public override void AddCompiledReference( string path ) => throw new NotSupportedException();
+		public override bool Describing => false;
+		internal override void Fail( string error ) => throw new NotSupportedException();
 		public override void AddGameFileReference( string path ) => throw new NotSupportedException();
 		public override Child CreateChild( string absolutePath ) => throw new NotSupportedException();
 		public override string ScanJson( string json ) => throw new NotSupportedException();

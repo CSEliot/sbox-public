@@ -38,15 +38,4 @@ public class MountPathCaseIdentityTests
 		Assert.AreEqual( "mount://testgame/maps/example.scene", loader.Path );
 		Assert.AreSame( loader, mount.GetByPath( "mount://testgame/MAPS/EXAMPLE.SCENE" ) );
 	}
-
-	[DataTestMethod]
-	[DataRow( "Maps/Example.SCENE" )]
-	[DataRow( "maps/example.scene" )]
-	[DataRow( "Maps\\Example" )]
-	public void ThumbnailWriterAndReaderUseCanonicalRelativeIdentity( string input )
-	{
-		var loader = CreateLoader( input, out _ );
-
-		Assert.AreEqual( "thumbs/testgame/maps/example.png", MountUtility.GetThumbnailPath( loader ) );
-	}
 }

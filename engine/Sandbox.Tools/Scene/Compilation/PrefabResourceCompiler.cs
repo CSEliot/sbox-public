@@ -10,15 +10,15 @@ namespace Editor;
 [ResourceIdentity( "prefab" )]
 internal class PrefabResourceCompiler : ResourceCompiler
 {
-	protected override Task<bool> Compile()
+	protected override async Task<bool> Compile()
 	{
 		if ( Context is not ResourceCompileContextImp context )
 			throw new InvalidOperationException( "Prefab compilation requires an editor resource context." );
 
 		if ( !context.TryReadOverrideInput( out var input ) )
 		{
-			AssetSystem.CompileGameResource( context );
-			return Task.FromResult( true );
+			await AssetSystem.CompileGameResource( context );
+			return true;
 		}
 
 		// Same as CompileGameResource, but fed from the in-memory override text -
@@ -57,6 +57,6 @@ internal class PrefabResourceCompiler : ResourceCompiler
 			}
 		}
 
-		return Task.FromResult( true );
+		return true;
 	}
 }
