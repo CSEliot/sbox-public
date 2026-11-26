@@ -20,21 +20,36 @@ namespace HotloadTests
 	/// </summary>
 	[TestClass]
 	[DoNotParallelize]
-	public class PendingPipeReadTest : HotloadTestBase
+	public class PendingPipeReadTest : HotloadFixtureTestBase
 	{
+		private const string FixtureDiff = """
+			public class PendingPipeReadFixture : IHotloadTestFixture
+			{
+			-	public int Version = 1;
+			+	public int Version = 2;
+
+				void IHotloadTestFixture.Test() { }
+			}
+			""";
+
 		/// <summary>
 		/// Marked the same way as <c>Editor.Mcp.McpPipeServer.lifetime</c>. The hotload must not
 		/// touch anything reachable from here.
 		/// </summary>
 		[SkipHotload]
-		[Reset]
 		static CancellationTokenSource MarkedLifetime;
 
 		/// <summary>
 		/// Same shape without the attribute, to show what the walk does to a live token source.
 		/// </summary>
-		[Reset]
 		static CancellationTokenSource UnmarkedLifetime;
+
+		[TestCleanup]
+		public void ClearStatics()
+		{
+			MarkedLifetime = null;
+			UnmarkedLifetime = null;
+		}
 
 		static async Task<byte[]> ReadOnce( Stream stream, CancellationToken cancellation )
 		{
@@ -73,7 +88,8 @@ namespace HotloadTests
 					await Task.Delay( 100 );
 					Assert.IsFalse( read.IsCompleted, "read should still be pending" );
 
-					Hotload();
+					using ( var fixture = await CreateFixtureAsync( FixtureDiff ) )
+						await fixture.HotloadAsync( configure: h => WatchStatics( h, typeof( PendingPipeReadTest ) ) );
 
 					await client.WriteAsync( new byte[] { 42 }, 0, 1 );
 					var received = await read.WaitAsync( TimeSpan.FromSeconds( 5 ) );
@@ -123,7 +139,8 @@ namespace HotloadTests
 					await Task.Delay( 100 );
 					Assert.IsFalse( read.IsCompleted, "read should still be pending" );
 
-					var result = Hotload( true );
+					using var fixture = await CreateFixtureAsync( FixtureDiff );
+					var result = await fixture.HotloadAsync( allowErrors: true, configure: h => WatchStatics( h, typeof( PendingPipeReadTest ) ) );
 
 					Console.WriteLine( $"HasErrors = {result.HasErrors}" );
 					Console.WriteLine( $"Warnings = {result.Warnings.Count()}" );
